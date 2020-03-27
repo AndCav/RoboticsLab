@@ -1,5 +1,5 @@
 /*Node1 in an infinite loop generates two random float numbers and publish them on topic Twofield
-just to see the result this node will be a subscriber of Node2 topic
+i'm using rostopic echo
 */
 
 #include "ros/ros.h"
@@ -36,7 +36,7 @@ _topic_pub.publish(req);
 }
 
 int main (int argc,char** argv){
-int i=0;
+int i=2;
 ros::init(argc,argv,"ros_asker");
 asker as;
 add_random::custom msg;
@@ -50,6 +50,7 @@ while(ros::ok()){
 	msg.first=float(rand())/float(RAND_MAX);
 	as.publishing(msg);
 	ROS_INFO_STREAM("Sending:"<<msg.first<<"+"<<msg.second);
+//	ros::spinOnce();
 	rate.sleep();
 	}
 return 0;
