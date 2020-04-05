@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+
+<robot name="kukaR800" xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:include filename="$(find robot_kukalike)/urdf/kuka_light_macro.xacro" />
+	
+		<xacro:base_link_macro 
+			base_link_name="base_link">
+		</xacro:base_link_macro>
+	
+		<xacro:kuka_joint
+			name="slider_joint"
+			type="prismatic"
+			parent="base_link"
+			child="slider">
+			<limit effort="300.0" lower="-0.3" upper="0.3" velocity="0.5"/>
+			<origin xyz="0 0 0.01" />
+			<axis xyz="1 0 0"/>
+		</xacro:kuka_joint>
+		<xacro:kuka_link name="slider">
+			<origin xyz="0 0 0" rpy="0 1.57 0"/>
+		</xacro:kuka_link>
+		<xacro:kuka_joint
+			name="1_joint"
+			type="revolute"
+			parent="slider"
+			child="1_link">
+			<limit effort="300" velocity="0.1" lower="-3.14" upper="3.14"/>
+			<origin xyz="0 0 0.1" />
+			<axis xyz="0 0 1"/>
+		</xacro:kuka_joint>
+
+		<xacro:kuka_link name="1_link">
+			<origin xyz="0 0 0" rpy="0 0 0.09"/>
+		</xacro:kuka_link>
+
+		<xacro:kuka_joint
+			name="2_joint"
+			type="revolute"
+			parent="1_link"
+			child="2_link">
+			<origin xyz="0 0 0.15" />
+			<limit effort="300" velocity="0.1" lower="-3.14" upper="3.14"/>
+			<axis xyz="0 1 0"/>
+		</xacro:kuka_joint>
+
+		<xacro:kuka_link name="2_link">
+			<origin xyz="0 0 0" rpy="-1.57 0 0.0"/>
+		</xacro:kuka_link>
+		
+		<xacro:kuka_joint
+			name="3_joint"
+			type="revolute"
+			parent="2_link"
+			child="3_link">
+			<origin xyz="0 0.15  0" />
+			<limit effort="300" velocity="0.1" lower="-3.14" upper="3.14"/>
+			<axis xyz="0 0 1"/>
+		</xacro:kuka_joint>
+
+		<xacro:kuka_link name="3_link">
+			
+			<origin xyz="0 0 0.05" rpy="0 0 0"/>
+		</xacro:kuka_link>
+	
+		<xacro:kuka_joint
+			name="4_joint"
+			type="revolute"
+			parent="3_link"
+			child="4_link">
+			<origin xyz="0 0 0.15 " />
+			<limit effort="300" velocity="0.1" lower="-3.14" upper="3.14"/>
+			<axis xyz="0 -1 0"/>
+		</xacro:kuka_joint>
+
+		<xacro:kuka_link name="4_link">
+			
+			<origin xyz="0 0 0" rpy="1.57 0 0"/>
+		</xacro:kuka_link>
+		<xacro:kuka_joint
+			name="5_joint"
+			type="revolute"
+			parent="4_link"
+			child="5_link">
+			<origin xyz="0 -0.15 0 " />
+			<limit effort="300" velocity="0.1" lower="-3.14" upper="3.14"/>
+			<axis xyz="0 0 1"/>
+		</xacro:kuka_joint>
+
+		<xacro:kuka_link name="5_link">
+			
+			<origin xyz="0 0 0.05" rpy="0 0 0"/>
+		</xacro:kuka_link>
+		<xacro:kuka_joint
+			name="6_joint"
+			type="revolute"
+			parent="5_link"
+			child="6_link">
+			<origin xyz="0 0 0.15 " />
+			<limit effort="300" velocity="0.1" lower="-3.14" upper="3.14"/>
+			<axis xyz="0 1 0"/>
+		</xacro:kuka_joint>
+
+		<xacro:kuka_link name="6_link">
+			
+			<origin xyz="0 0 0" rpy="1.57 0 0"/>
+		</xacro:kuka_link>
+		<xacro:kuka_joint
+			name="wrist"
+			type="revolute"
+			parent="6_link"
+			child="end_effector">
+			<origin xyz="0 0 0 " />
+			<limit effort="300" velocity="0.1" lower="-3.14" upper="3.14"/>
+			<axis xyz="0 0 1"/>
+		</xacro:kuka_joint>
+
+		<xacro:kuka_link name="end_effector">
+			
+			<origin xyz="0 0 0.1" rpy="0 0 0"/>
+		</xacro:kuka_link>
+</robot>

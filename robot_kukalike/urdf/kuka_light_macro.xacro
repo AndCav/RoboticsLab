@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<robot name="kuka_light_macro" xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<xacro:macro name="base_link_macro" params="base_link_name">
+		<link name="${base_link_name}">
+			<visual>
+				<geometry>
+					<cylinder length="0.01" radius="0.2"/>
+				</geometry>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+					<material name="yellow">
+						<color rgba="1 1 0 1"/>
+					</material>
+			</visual>
+			<collision>
+				<geometry>
+					<cylinder length="0.03" radius="0.2"/>
+				</geometry>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+			</collision>
+			<inertial>
+				<mass value="1"/>
+					<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+					</inertial>
+		</link>
+	</xacro:macro>
+
+	<xacro:macro name="kuka_joint" params="name type parent child *limit *origin *axis">
+		<joint name="${name}" type="${type}">
+			<parent link="${parent}" />
+			<child link="${child}" />
+			<xacro:insert_block name="limit" />	
+	    		<xacro:insert_block name="origin" />
+			<xacro:insert_block name="axis" />
+	    	
+	    		<dynamics damping="50" friction="1"/>
+		</joint>
+	</xacro:macro>
+	
+	
+	<xacro:macro name="kuka_link" params="name  *origin">
+		<link name="${name}">
+			<visual>
+				<geometry>
+				<cylinder length="0.20" radius="0.05"/>
+				</geometry>
+				<xacro:insert_block name="origin" />			
+		    <material name="red">
+		      <color rgba="0 0 1 1"/>
+		    </material>
+		  </visual>
+		  <collision>
+				<geometry>
+				<cylinder length="0.2" radius="0.05"/>
+				</geometry>
+				<xacro:insert_block name="origin" />		
+			</collision>
+			<inertial>
+				<mass value="1"/>
+					<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+		  </inertial>
+	  </link>
+	</xacro:macro>	
+
+
+</robot>
